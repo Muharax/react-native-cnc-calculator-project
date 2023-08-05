@@ -1,0 +1,26 @@
+Komponent TextInput w React Native ma wiele atrybutów. Oto niektóre z nich:
+
+allowFontScaling: Określa, czy czcionka powinna skalować się do ustawień czcionki systemu użytkownika.
+autoCapitalize: Kontroluje, czy tekst powinien automatycznie zaczynać się od wielkiej litery.
+autoCompleteType: Wskazuje, który typ wartości wprowadzanych powinien być automatycznie uzupełniony.
+autoCorrect: Kontroluje, czy tekst powinien automatycznie poprawiać błędy.
+autoFocus: Określa, czy pole tekstowe powinno automatycznie otrzymywać fokus po załadowaniu.
+blurOnSubmit: Kontroluje, czy pole tekstowe powinno tracić fokus po wysłaniu formularza.
+clearButtonMode: Kiedy przycisk do czyszczenia tekstu powinien być widoczny.
+contextMenuHidden: Jeżeli ustawione na true, ukrywa menu kontekstowe.
+dataDetectorTypes: Właściwość umożliwiająca wykrywanie różnego rodzaju informacji, takich jak adresy URL, numerów telefonów, daty, adresów itp.
+defaultValue: Wartość początkowa dla pola tekstowego.
+editable: Jeżeli ustawione na false, użytkownik nie będzie mógł modyfikować tekstu.
+keyboardAppearance: Możliwość wyboru jasnej lub ciemnej klawiatury.
+keyboardType: Typ klawiatury do wykorzystania.
+maxLength: Maksymalna liczba znaków, które można wprowadzić.
+multiline: Jeżeli ustawione na true, pole tekstowe będzie obsługiwać wiele linii.
+onChange: Funkcja wywoływana, gdy tekst zmienia się.
+onFocus: Funkcja wywoływana, gdy pole tekstowe otrzymuje fokus.
+onBlur: Funkcja wywoływana, gdy pole tekstowe traci fokus.
+placeholder: Tekst, który jest wyświetlany, gdy nie ma wartości.
+secureTextEntry: Jeżeli true, znaki są zasłonięte tak, jak to ma miejsce dla pól hasła.
+selectionColor: Kolor selektora kursora.
+textAlign: Wyśrodkowanie tekstu.
+value: Wartość tekstu w polu tekstowym.
+Więcej szczegółów oraz pełną listę atrybutów możesz znaleźć w oficjalnej dokumentacji React Native: TextInput. Pamiętaj jednak, że niektóre z nich mogą być dostępne tylko na określonej platformie (iOS lub Android).
