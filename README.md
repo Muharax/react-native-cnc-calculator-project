@@ -3,3 +3,5 @@
 Lesson about react native
 
 expo start
+
+![IMAGE](https://i.ibb.co/1MsrLdD/Screenshot-20230807-234325-Expo-Go.jpg)
