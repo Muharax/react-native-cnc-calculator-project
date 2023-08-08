@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { TextInput, Text, TouchableOpacity, View, StyleSheet, BackHandler } from 'react-native';
+import { TextInput, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { tablicaTolerancji } from './tolerancjaOtworow/tablicaTolerancjiOtworow';
 
 function Pasowania() {
   const [selectedValue, setSelectedValue] = useState("H7");
@@ -10,14 +9,79 @@ function Pasowania() {
   const [showWalu, setShowWalu] = useState(false);
   const start = 7;
   const end = 14;
-  const normaStart = 0;
-  const normaEnd = 3150;
   const itemsH = Array.from({length: end - start + 1}, (_, i) => `H${start + i}`);
+
+  function range(start, end) {
+    return Array(end - start + 1).fill().map((_, idx) => start + idx)
+  }
+
+
+
+  let tablicaTolerancji = {
+    H1: [
+      {przedzial: range(1, 3), wartosc: [0.0008, 0]},
+      {przedzial: range(4, 6), wartosc: [0.001, +0]},
+      {przedzial: range(7, 10), wartosc: [0.001, +0]},
+      {przedzial: range(11, 18), wartosc: [0.0012, +0]},
+      {przedzial: range(19, 30), wartosc: [0.0015, +0]},
+      {przedzial: range(31, 50), wartosc: [0.0015, +0]},
+      {przedzial: range(51, 80), wartosc: [0.002, +0]},
+      {przedzial: range(81, 120), wartosc: [0.0025, +0]},
+      {przedzial: range(121, 180), wartosc: [0.0035, +0]},
+      {przedzial: range(181, 250), wartosc: [0.0045, +0]},
+      {przedzial: range(251, 315), wartosc: [0.006, +0]},
+      {przedzial: range(316, 400), wartosc: [0.007, +0]},
+      {przedzial: range(401, 500), wartosc: [0.008, +0]},
+      {przedzial: range(501, 630), wartosc: [0.009, +0]},
+      {przedzial: range(631, 800), wartosc: [0.010, +0]},
+      {przedzial: range(801, 1000), wartosc: [0.011, +0]},
+      {przedzial: range(1001, 1250), wartosc: [0.013, +0]},
+      {przedzial: range(1251, 1600), wartosc: [0.015, +0]},
+      {przedzial: range(1601, 2000), wartosc: [0.018, +0]},
+      {przedzial: range(2001, 2500), wartosc: [0.022, +0]},
+      {przedzial: range(2501, 3150), wartosc: [0.025, +0]},
+    ],
+    H6: [
+      {przedzial: [1,2,3], wartosc: [0.006, 0]},
+      {przedzial: [4,5,6], wartosc: [0.008, +0]},
+      {przedzial: [7,8,9,10], wartosc: [0.009, +0]},
+    ],
+    H7: [
+      {przedzial: [1,2,3], wartosc: [0.010, 0]},
+      {przedzial: [4,5,6], wartosc: [0.012, +0]},
+      {przedzial: [7,8,9,10], wartosc: [0.015, +0]},
+    ],
+    H8: [
+      {przedzial: [1,2,3], wartosc: [0.014, 0]},
+      {przedzial: [4,5,6], wartosc: [0.018, 0]},
+      {przedzial: [7,8,9,10], wartosc: [0.022, +0]},
+    ],
+    H9: [
+      {przedzial: [1,2,3], wartosc: [0.025, 0]},
+      {przedzial: [4,5,6], wartosc: [0.030, 0]},
+      {przedzial: [7,8,9,10], wartosc: [0.036, +0]},
+    ],
+    H10: [
+      {przedzial: [1,2,3], wartosc: [0.030, 0]},
+      {przedzial: [4,5,6], wartosc: [0.048, 0]},
+    ],
+    H11: [
+      {przedzial: [1,2,3], wartosc: [0.030, 0]},
+      {przedzial: [4,5,6], wartosc: [0.048, 0]},
+    ],
+    H12: [
+      {przedzial: [1,2,3], wartosc: [0.030, 0]},
+      {przedzial: [4,5,6], wartosc: [0.048, 0]},
+    ],
+
+  };
+  
+
 
   const znajdzWartosc = (input, selectedValue) => {
     const tolerancje = tablicaTolerancji[selectedValue];
     if (!tolerancje) {
-      return ["nieznana", "nieznana"];
+      return ["nieznana", "nieznana"]; // albo jakaś inna domyślna wartość
     }
   
     const inputNum = parseInt(input);
@@ -26,17 +90,20 @@ function Pasowania() {
         return tolerancje[i].wartosc;
       }
     }
-    return ["...", "..."];
+    return ["b/d", "b/d"]; // albo jakaś inna domyślna wartość
   };
+  
+
   const onInputChange = (value) => {
     setInputValue(value);
   };
+
   const wartosc = znajdzWartosc(inputValue, selectedValue);
+
 
   return (
     <View>
       <View>
-        <View style={{marginBottom: 10}}>
         <CustomButton
           title="Tolerancja otworu"
           onPress={() => setShowOtworu(!showOtworu)}
@@ -72,39 +139,30 @@ function Pasowania() {
 
             <View style={styles.naglowekOtworow}>
               <Text style={styles.wartosciii}>
-                {'Wartość: '}
-                <Text style={{fontWeight: 'bold' }}>{`${inputValue} ${selectedValue}`}</Text>
-                {' tolerancja'}
+                  {`Wartość: ${inputValue}${selectedValue} tolerancja `}
               </Text>
             </View>
             
             <View>
               <Text style={styles.superscript}>
-                {`${wartosc[0]} mm `}
+                 {`${wartosc[0]} μm `}
               </Text>
               <Text style={styles.subscript}>
-                {`${wartosc[1]} mm `}
+                {`${wartosc[1]} μm `}
               </Text>
             </View>
 
-          </View>
 
-
-          <View>
-            <Text>
-              <Text style={{fontWeight: 'bold'}}>{`MAX: `}</Text>
-              {`${inputValue ? `${Number(inputValue) + Number(wartosc[0])} mm` : '...'}`}
-            </Text>
-            <Text>
-              <Text style={{fontWeight: 'bold'}}>{`MIN: `}</Text>
-              {`${inputValue ? `${Number(inputValue)} mm` : '...'}`}
-            </Text>
+            {/* <Text style={styles.subscript}>
+                {`MAX${inputValue}.0${wartosc[0]} `}
+                {`MIN${inputValue}.0${wartosc[0]} `}
+            </Text> */}
 
           </View>
 
         </View>}
 
-        </View>
+
 
 
 
@@ -227,39 +285,6 @@ function CustomButton({ onPress, title }) {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function MainWindow() {
   const [currentScreen, setCurrentScreen] = useState('Home');
 
@@ -280,8 +305,8 @@ function MainWindow() {
             onPress={() => setCurrentScreen('Settings')}
           />
           <CustomButton
-            title="Exit"
-            onPress={() => BackHandler.exitApp()}
+            title="Screen"
+            onPress={() => setCurrentScreen('Settings')}
           />
         </View>
       </View>
@@ -312,8 +337,8 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   outInput: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'row', // Dodane dla wyświetlenia elementów w rzędzie
+    alignItems: 'center', // Dodane dla wycentrowania elementów pionowo
     borderColor: 'dark',
     borderWidth: 2,
   },
@@ -351,18 +376,14 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     width: 100,
-    marginLeft: 10, 
+    marginLeft: 10, // Dodana wartość
     textAlign: 'center',
   },
   select: {
-    flex: 1, 
-    justifyContent: 'center',
-    backgroundColor: '#d5d5d5',
-    marginLeft: 10,
-    borderRadius: 10,
+    flex: 1, // Dodane dla wyświetlenia elementów w rzędzie
+    justifyContent: 'center', // Dodane dla wycentrowania elementów pionowo
   },
   samSelectlect: {
-    
     // width: '20%',
     // backgroundColor: 'grey',
   },
@@ -385,12 +406,12 @@ const styles = StyleSheet.create({
   superscript: {
     fontSize: 10,
     lineHeight: 10,
-    top: -10,
+    top: -10, // lub inna wartość, jeżeli potrzebujesz
   },
   subscript: {
     fontSize: 10,
     lineHeight: 20,
-    bottom: -6,
+    bottom: -6, // lub inna wartość, jeżeli potrzebujesz
   },
 });
 
