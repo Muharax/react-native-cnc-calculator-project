@@ -2,7 +2,7 @@ function range(start, end) {
   return Array(end - start + 1).fill().map((_, idx) => start + idx)
 }
 
-export let tablicaTolerancji = {
+export let tablicaTolerancjiOtworow = {
   H1: [
     {przedzial: range(1, 3), wartosc: [0.0008, 0]},
     {przedzial: range(4, 6), wartosc: [0.001, +0]},
