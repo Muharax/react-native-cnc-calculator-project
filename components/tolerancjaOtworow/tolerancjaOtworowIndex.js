@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { tablicaTolerancjiOtworow } from './tablicaTolerancjiOtworow';
+import { useLanguage } from '../settings/translations';
+import slownik from '../settings/pl';
 import styles from '../styles';
 
 
 
 function TolerancjaOtworow() {
+    const { language } = useLanguage();
+    const translations = slownik[language];
     const [selectedValue, setSelectedValue] = useState("H7");
     const [inputValue, setInputValue] = useState("");
     const [showOtworu, setShowOtworu] = useState(false);
@@ -42,17 +46,17 @@ function TolerancjaOtworow() {
         <View>
           <View style={{marginBottom: 10}}>
           <CustomButton
-            title="Tolerancja otworu"
+            title={translations.hole}
             onPress={() => setShowOtworu(!showOtworu)}
           />
           {showOtworu && <View>
             <View style={styles.wLinii}>
-              <Text>{'fi'}</Text>
+              <Text style={{fontSize:30}}>{'ø'}</Text>
               <TextInput
                 keyboardType='numeric'
                 editable
                 maxLength={10}
-                placeholder='np. 70'
+                placeholder='70'
                 style={styles.input}
                 onChangeText={setInputValue}
                 value={inputValue}
@@ -76,9 +80,9 @@ function TolerancjaOtworow() {
   
               <View style={styles.naglowekOtworow}>
                 <Text style={styles.wartosciii}>
-                  {'Wartość: '}
+                  {`${translations.wartosc} `}
                   <Text style={{fontWeight: 'bold' }}>{`${inputValue} ${selectedValue}`}</Text>
-                  {' tolerancja'}
+                  {` ${translations.tolerancja}`}
                 </Text>
               </View>
               
@@ -107,7 +111,7 @@ function TolerancjaOtworow() {
               </Text>
               <Text>
                 <Text style={{fontWeight: 'bold'}}>{`MIN: `}</Text>
-                {`${inputValue ? `${Number(inputValue)} mm` : '...'}`}
+                {`${inputValue ? `${Number(inputValue) + Number(wartosc[1])} mm` : '...'}`}
               </Text>
   
             </View>

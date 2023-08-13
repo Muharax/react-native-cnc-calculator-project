@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useLanguage } from '../settings/translations';
+import slownik from '../settings/pl';
 import styles from '../styles';
 
 function PosuwNarzedzia({sharedState, setSharedState}) {
+    const { language } = useLanguage();
+    const translations = slownik[language];
     const [inputValueON, setInputValueON] = useState("");
     const [inputValueIO, setInputValueIO] = useState("");
     const [inputValuePNZ, setInputValuePNZ] = useState("");
@@ -35,7 +39,7 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
 
       const posuw = on * io * pnz;
     
-      setInputValueWynik(posuw.toFixed(2));  // Use toFixed(2) to round to 2 decimal places
+      setInputValueWynik(posuw.toFixed(0));  // Use toFixed(2) to round to 2 decimal places
     }
 
     useEffect(() => {
@@ -58,7 +62,7 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
         <View>
           <View style={{marginBottom: 10}}>
           <CustomButton
-            title="Posuw narzędzia [F]"
+            title={`${translations.posuwNarzedzia} [F]`}
             onPress={() => setObrotyNarzędzia(!ObrotyNarzędzia)}
           />
           {ObrotyNarzędzia && <View>
@@ -66,7 +70,7 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
 
               <View style={{flexDirection:'row', }}>
                 <View>
-                  <Text>Obroty narzędzia [obr/min]</Text>
+                  <Text>{`${translations.obr} [${translations.jednostka}]                 `}</Text>
                   <TextInput
                     keyboardType='numeric'
                     editable
@@ -78,7 +82,7 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
                 </View>
                 <View>
                   <CustomButton 
-                      title="Pobierz"
+                      title={`${translations.pobierz}`}
                       style={{marginTop: 20, marginLeft:-50}}
                       onPress={pobierzObrotyNarzedzia}
                   ></CustomButton>
@@ -86,7 +90,7 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
               </View>
 
               <View>
-                <Text>Ilość ostrzy [Z]</Text>
+                <Text>{`${translations.iloscOstrzy}`} [Z]</Text>
                 <TextInput
                   keyboardType='numeric'
                   editable
@@ -98,7 +102,7 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
               </View>
 
               <View>
-                <Text>Posuw na ząb [fz]</Text>
+                <Text>{`${translations.posuwNaZab}`} [fz]</Text>
                 <TextInput
                   keyboardType='numeric'
                   editable
@@ -110,11 +114,11 @@ function PosuwNarzedzia({sharedState, setSharedState}) {
               </View>
 
               <View style={styles.obrotyWynik}>
-                <Text style={styles.fs}>Posuw [f] </Text>
+                <Text style={styles.fs}>{`${translations.posuw}`} [f] </Text>
                 <Text style={styles.fW}>{inputValueWynik === "" ? "..." : inputValueWynik}</Text>
                 <Text style={styles.fs}> [mm/min]</Text>
                 <CustomButton 
-                    title="Reset"
+                    title={`${translations.btnReset}`}
                     style={{marginLeft: 10}}
                     onPress={resetInputs}
                     >

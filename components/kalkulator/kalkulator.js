@@ -2,17 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { tablicaTolerancjiWalow } from './tablicaTolerancjiWalow';
-import { useLanguage } from '../settings/translations';
-import slownik from '../settings/pl';
 import styles from '../styles';
 
 
-const TolerancjaWalow = () => {
-  const { language } = useLanguage();
-  const translations = slownik[language];
-  const [showWalu, setShowWalu] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const [selectedValue, setSelectedValue] = useState('h1');
+const Kalkulator = () => {
+  
 
   function CustomButton({ onPress, title }) {
     return (
@@ -42,21 +36,12 @@ const TolerancjaWalow = () => {
   return (
     <View style={{marginBottom: 10}}>
         <CustomButton
-          title={translations.walu}
+          title="Kalkulator"
           onPress={() => setShowWalu(!showWalu)}
         />
         {showWalu && <View>
           <View style={styles.wLinii}>
-          <Text style={{fontSize:30}}>{'ø'}</Text>
-            <TextInput
-              keyboardType='numeric'
-              editable
-              maxLength={10}
-              placeholder='70'
-              style={styles.input}
-              onChangeText={setInputValue}
-              value={inputValue}
-            />
+            <Text>{'fi'}</Text>
             <View style={styles.select}>
               <Picker
                 style={styles.samSelect}
@@ -64,9 +49,8 @@ const TolerancjaWalow = () => {
                 onValueChange={(itemValue) => setSelectedValue(itemValue)}
               >
                 
-              {Object.keys(tablicaTolerancjiWalow).map((item) => (
                 <Picker.Item key={item} label={item} value={item} />
-              ))}
+              
 
               </Picker>
             </View>
@@ -76,9 +60,9 @@ const TolerancjaWalow = () => {
 
             <View style={styles.naglowekOtworow}>
               <Text style={styles.wartosciii}>
-                {`${translations.wartosc} `}
+                {'Wartość: '}
                 <Text style={{fontWeight: 'bold' }}>{`${inputValue} ${selectedValue}`}</Text>
-                {` ${translations.tolerancja}`}
+                {' tolerancja'}
               </Text>
             </View>
             
@@ -118,4 +102,4 @@ const TolerancjaWalow = () => {
 };
 
 
-export default TolerancjaWalow;
+export default Kalkulator;

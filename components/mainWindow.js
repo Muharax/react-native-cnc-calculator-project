@@ -6,6 +6,8 @@ import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import ObrotyNarzedzia from './obrotyNarzedznia/obrotyNarzedznia';
 import PosuwNarzedzia from './posuwNarzedzia/posuwNarzedzia';
+import { useLanguage } from './settings/translations';
+import slownik from './settings/pl';
 
 function HomeScreen() {
   return (
@@ -17,26 +19,25 @@ function HomeScreen() {
 }
 
 function Settings() {
-  const [selectedLanguage, setSelectedLanguage] = useState("PL");
+  const { language, setLanguage } = useLanguage();
+  const translations = slownik[language];
 
   return (
-    <View>
-      <Text>Language</Text>
-      <Picker
-        selectedValue={selectedLanguage}
-        onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
-      >
-        <Picker.Item label="Polski" value="PL" />
-        <Picker.Item label="English" value="PL" />
-        
-      </Picker>
-      <CustomButton
-        title="Zapisz"
-        onPress={() => {
-          console.log('Button pressed');
-        }}
-      />
-    </View>
+      <View style={{ padding: 15, backgroundColor: '#d5d5d5', borderRadius: 7 }}>
+          <Text style={{marginBottom:10}}>{translations.chooseLang}:</Text>
+          <View style={{backgroundColor: '#f9f9f9', borderRadius:7}}>
+            <Picker
+                selectedValue={language}
+                onValueChange={(itemValue) => {
+                  console.log("Zmiana języka na:", itemValue);
+                  setLanguage(itemValue);
+                }}
+            >
+                <Picker.Item label="Polski" value="pl" />
+                <Picker.Item label="English" value="en" />
+            </Picker>
+          </View>
+      </View>
   );
 }
 
@@ -49,7 +50,9 @@ function CustomButton({ onPress, title }) {
 }
 
 function MainWindow() {
-  
+
+  const { language } = useLanguage();
+  const translations = slownik[language];
   const [currentScreen, setCurrentScreen] = useState('Home');
   const [sharedState, setSharedState] = useState("");
 
@@ -58,15 +61,15 @@ function MainWindow() {
       <View style={styles.menu}>
         <View style={styles.btnContainer}>
           <CustomButton
-            title="Home"
+            title={translations.home}
             onPress={() => setCurrentScreen('Home')}
           />
           <CustomButton
-            title="Pasowania"
+            title={translations.tools}
             onPress={() => setCurrentScreen('Pasowania')}
           />
           <CustomButton
-            title="Settings"
+            title={translations.settings}
             onPress={() => setCurrentScreen('Settings')}
           />
           {/* <CustomButton
@@ -74,7 +77,7 @@ function MainWindow() {
             onPress={() => setCurrentScreen('Info')}
           /> */}
           <CustomButton
-            title="Exit"
+            title={translations.exit}
             onPress={() => BackHandler.exitApp()}
           />
         </View>

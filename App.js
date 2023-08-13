@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import MainWindow from './components/mainWindow';
+import { LanguageProvider } from './components/settings/translations';
 
 export default function App() {
   return (
     <>
     <StatusBar style="auto" />
-    <MainWindow></MainWindow>
+    <LanguageProvider>
+      <MainWindow></MainWindow>
+    </LanguageProvider>
     </>
   );
 }
