@@ -101,6 +101,9 @@ export default styles = StyleSheet.create({
       // backgroundColor: 'grey',
     },
 
+
+
+
     superscript: {
       fontSize: 10,
       lineHeight: 10,
@@ -111,4 +114,41 @@ export default styles = StyleSheet.create({
       lineHeight: 20,
       bottom: -6,
     },
+
+
+
+
+
+
+    
+    headerRow: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'lightgray',
+      marginBottom:7,
+    },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderBottomWidth: 1,
+      borderBottomColor: 'gray'
+    },
+    headerCell: {
+      flex: 1,
+      padding: 10,
+      fontWeight: 'bold',
+    },
+    cell: {
+      flex: 1,
+      padding: 10,
+    },
+    image: {
+      width: 60,
+      height: 60,
+      resizeMode: 'contain'
+    }
+
+
   });

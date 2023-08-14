@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { Text, TouchableOpacity, View, BackHandler, Image, ScrollView } from 'react-native';
 import TolerancjaOtworow from './tolerancjaOtworow/tolerancjaOtworowIndex';
 import TolerancjaWalow from './tolerancjaWalow/tolerancjaWalowIndex';
-import { Picker } from '@react-native-picker/picker';
-import styles from './styles';
 import ObrotyNarzedzia from './obrotyNarzedznia/obrotyNarzedznia';
 import PosuwNarzedzia from './posuwNarzedzia/posuwNarzedzia';
+import SymboleTolerancji from './symboleTolerancji/symboleTolerancji';
+
+import { Picker } from '@react-native-picker/picker';
+import styles from './styles';
+
 import { useLanguage } from './settings/translations';
 import slownik from './settings/pl';
 
@@ -72,10 +75,6 @@ function MainWindow() {
             title={translations.settings}
             onPress={() => setCurrentScreen('Settings')}
           />
-          {/* <CustomButton
-            title="Info"
-            onPress={() => setCurrentScreen('Info')}
-          /> */}
           <CustomButton
             title={translations.exit}
             onPress={() => BackHandler.exitApp()}
@@ -91,6 +90,7 @@ function MainWindow() {
             <TolerancjaWalow />
             <ObrotyNarzedzia setSharedState={setSharedState} />
             <PosuwNarzedzia sharedState={sharedState} setSharedState={setSharedState}/>
+            <SymboleTolerancji />
           </View>
         )}
         {currentScreen === 'Settings' && <Settings />}

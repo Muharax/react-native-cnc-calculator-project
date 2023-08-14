@@ -20,6 +20,9 @@ const slownik = {
     'iloscOstrzy': 'Ilość ostrzy',
     'posuwNaZab': 'Posuw na ząb',
     'posuw': 'Posuw',
+    'symboleTolerancji': 'Symbole tolerancji',
+    'zamknij': 'Zamknij',
+    'symbol': 'Symbol',
 
   },
   'en': {
@@ -43,6 +46,9 @@ const slownik = {
     'iloscOstrzy': 'Number of blades',
     'posuwNaZab': 'Feed per tooth',
     'posuw': 'Feed',
+    'symboleTolerancji': 'Tolerance symbols',
+    'zamknij': 'Close',
+    'symbol': 'Symbol',
   },
 };
 
