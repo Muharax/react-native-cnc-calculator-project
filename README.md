@@ -1,7 +1,5 @@
 # react-native-cnc-calculator-project
 
-Lesson about react native
-
 expo start
 
 ![IMAGE](https://i.ibb.co/YyrKTGq/Screenshot-20230814-082614-Expo-Go.jpg)
